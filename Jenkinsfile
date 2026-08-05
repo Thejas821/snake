@@ -27,6 +27,17 @@ pipeline{
                 '''
             }
         }
+        stage('SonarQube Analysus '){
+            steps {
+                sh '''
+                    mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+                    -Dsonar.projectKey=snake \
+                    -Dsonar.projectName='snake' \
+                    -Dsonar.host.url=http://13.201.53.173:9000 \
+                    -Dsonar.token=sqp_de62c6f7e3b4f56d084636ceb8ffd57d34a68c5b
+                '''
+            }
+        }
         
     }
     post { 
