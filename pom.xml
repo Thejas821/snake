@@ -95,7 +95,6 @@
 
     <build>
         <plugins>
-
             <!-- Spring Boot Plugin -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -116,13 +115,11 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.11</version>
                 <executions>
-
                     <execution>
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
                     </execution>
-
                     <execution>
                         <id>report</id>
                         <phase>test</phase>
@@ -130,35 +127,25 @@
                             <goal>report</goal>
                         </goals>
                     </execution>
-
                 </executions>
             </plugin>
 
-            <!-- OWASP Dependency Check (Optimized) -->
+            <!-- OWASP Dependency Check -->
             <plugin>
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
                 <version>12.1.3</version>
                 <configuration>
-
-                    <!-- Reports -->
                     <format>ALL</format>
-
-                    <!-- Fail only for high vulnerabilities -->
-                    <failBuildOnCVSS>12</failBuildOnCVSS>
+                    <!-- Fail on High vulnerabilities (7.0+) -->
+                    <failBuildOnCVSS>7.0</failBuildOnCVSS>
                     <failOnError>false</failOnError>
-
-                    <!-- 🔥 FIX: Disable OSS Index (removes rate limit errors) -->
+                    <!-- Disable OSS Index to avoid API rate limit errors -->
                     <ossIndexAnalyzerEnabled>false</ossIndexAnalyzerEnabled>
-
-                    <!-- Optional performance tuning -->
                     <centralAnalyzerEnabled>false</centralAnalyzerEnabled>
                     <retireJsAnalyzerEnabled>false</retireJsAnalyzerEnabled>
-
-                    <!-- Cache + performance -->
                     <autoUpdate>true</autoUpdate>
                     <cveValidForHours>24</cveValidForHours>
-
                 </configuration>
                 <executions>
                     <execution>
@@ -169,19 +156,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-        <reportSets>
-          <reportSet>
-            <reports>
-              <!-- select non-aggregate reports -->
-              <report>report</report>
-            </reports>
-          </reportSet>
-        </reportSets>
-      </plugin>
-
         </plugins>
     </build>
 </project>
