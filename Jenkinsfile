@@ -28,5 +28,16 @@ pipeline{
             }
         }
         
-    }       
+    }
+    post { 
+        always { 
+            // Generates and displays the JaCoCo coverage report in Jenkins
+            jacoco( 
+                execPattern: '**/target/*.exec', 
+                classPattern: '**/target/classes', 
+                sourcePattern: '**/src/main/java', 
+                exclusionPattern: '**/*Test.class' 
+            ) 
+        } 
+    }        
 }
